@@ -16,49 +16,51 @@ This places an image of your signature on the page. It isn't a certified or veri
 
 ## How it works
 
-Everything runs in the browser. [pdf.js](https://mozilla.github.io/pdf.js/) renders the pages and [pdf-lib](https://pdf-lib.js.org/) writes the signed PDF. Both are vendored in `vendor/`, and the handwriting fonts are in `fonts/`, so the site doesn't load anything from a third party.
+Everything runs in the browser. [pdf.js](https://mozilla.github.io/pdf.js/) renders the pages and [pdf-lib](https://pdf-lib.js.org/) writes the signed PDF. Both are vendored in `public/vendor/`, and the handwriting fonts are in `public/fonts/`, so the site doesn't load anything from a third party.
 
 `vercel.json` sets a strict Content Security Policy that only allows the site's own scripts, styles and fonts.
 
-## What's in this repo
+## Project structure
 
-There are two versions of the site right now:
+The site is built with [Astro](https://astro.build/).
 
-- **Root (`index.html`, `app.js`, `style.css`)**: the original static app. No build step.
-- **`astro/`**: an Astro version. It has a simple homepage at `/`, the signer at `/sign`, and a template for landing pages. I'm trying this out to see if it works better for adding landing pages. We may remove it later.
+```
+public/                  Served as is
+  app.js, style.css      The signer app
+  vendor/                pdf.js and pdf-lib
+  fonts/                 Handwriting fonts for typed signatures
+src/
+  pages/index.astro      Homepage (/)
+  pages/sign.astro       The signer (/sign)
+  pages/[slug].astro     Landing pages, generated from the data file below
+  data/landing-pages.ts  Landing page content
+  components/LandingTemplate.astro
+  layouts/Base.astro     Shared <head> for every page
+  layouts/Site.astro     Shared layout for the homepage and landing pages
+  styles/site.css        Styles for the homepage and landing pages
+```
 
-The signer code is the same in both. In the Astro version it lives in `astro/public/` and Astro serves it as is.
+The signer is plain JavaScript in `public/`. Astro doesn't bundle or change it.
 
 ## Running it locally
 
-**Static version:** serve the repo root with any static server, for example:
-
 ```sh
-npx serve .
-```
-
-**Astro version:**
-
-```sh
-cd astro
 npm install
 npm run dev      # http://localhost:4321
-npm run build    # outputs to astro/dist
+npm run build    # outputs to dist/
+npm run preview  # serves the build
 ```
 
-## Adding a landing page (Astro)
+## Adding a landing page
 
-Add an entry to `astro/src/data/landing-pages.ts`. Each entry becomes a page at `/<slug>` using `astro/src/components/LandingTemplate.astro`, and gets linked in the footer. There's a commented-out example in the file.
-
-Shared styles for the homepage and landing pages are in `astro/src/styles/site.css`. They use the same colors as the app.
+Add an entry to `src/data/landing-pages.ts`. Each entry becomes a page at `/<slug>` using `src/components/LandingTemplate.astro`, and gets linked in the footer. There's a commented-out example in the file.
 
 ## Deploying
 
-The repo root deploys as a static site on Vercel by default. To deploy the Astro version, set the Vercel project's Root Directory to `astro`.
+Vercel detects Astro automatically. No extra settings needed.
 
-Before deploying the Astro version, set `site` in `astro/astro.config.mjs` to the real domain. It's used for canonical URLs.
+Before deploying, set `site` in `astro.config.mjs` to the real domain. It's used for canonical URLs.
 
 ## Notes
 
-- If you change the signer, update it in both places (root and `astro/public/`) until we pick one version.
-- Keep CSS in external files. Inline styles or scripts will be blocked by the CSP. The Astro config already sets `inlineStylesheets: 'never'` for this.
+- Keep CSS in external files. Inline styles or scripts will be blocked by the CSP. `astro.config.mjs` already sets `inlineStylesheets: 'never'` for this.
