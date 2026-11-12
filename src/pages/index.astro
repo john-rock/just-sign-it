@@ -1,9 +1,11 @@
 ---
 import Site from '../layouts/Site.astro';
+import { appSchema } from '../data/schema';
 ---
 <Site
   title="Just Sign It — Sign a PDF in your browser"
   description="Sign PDFs right in your browser. Nothing gets uploaded, so your file never leaves your computer. Free, no account."
+  schema={appSchema(Astro.site)}
 >
   <h1>Sign PDFs <mark>right in your browser.</mark></h1>
   <p>Open a PDF, add your signature, and download the signed copy. Nothing gets uploaded, so your file <mark>never leaves your computer.</mark></p>

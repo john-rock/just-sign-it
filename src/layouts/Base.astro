@@ -1,11 +1,16 @@
 ---
-// Shared <head> for every page. Each page passes its own title/description for SEO.
+// Shared <head> for every page. Each page passes its own title/description for SEO,
+// and optionally `schema`: JSON-LD structured data (one object or a list) for search and answer engines.
 interface Props {
   title: string;
   description: string;
+  schema?: object | object[];
 }
-const { title, description } = Astro.props;
+const { title, description, schema } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og.png', Astro.site);
+// Escape "<" so text inside the JSON can never close the <script> tag early.
+const jsonLd = schema && JSON.stringify(schema).replace(/</g, '\\u003c');
 ---
 <!doctype html>
 <html lang="en">
@@ -16,11 +21,20 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 <meta name="description" content={description}>
 <link rel="canonical" href={canonical}>
 <meta name="theme-color" content="#2563eb">
+<meta property="og:site_name" content="Just Sign It">
 <meta property="og:title" content={title}>
 <meta property="og:description" content={description}>
 <meta property="og:type" content="website">
+<meta property="og:url" content={canonical}>
+<meta property="og:image" content={ogImage}>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Just Sign It: sign a PDF in your browser. Free, no account.">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="sitemap" href="/sitemap-index.xml">
 <link rel="stylesheet" href="/fonts/fonts.css">
+{jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
 <slot name="head" />
 </head>
 <body>

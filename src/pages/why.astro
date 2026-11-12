@@ -1,9 +1,11 @@
 ---
 import Site from '../layouts/Site.astro';
+import { breadcrumbSchema } from '../data/schema';
 ---
 <Site
   title="Why I built Just Sign It"
   description="I needed to sign a few documents for my township and couldn't find a simple PDF signer that didn't make me create an account. So I built one."
+  schema={breadcrumbSchema(Astro.site, 'Why I built this', '/why')}
 >
   <h1>Why I built this</h1>
   <p>I recently had to sign a few documents for my township. Simple stuff: open the PDF, put my signature on it, send it back.</p>

@@ -3,12 +3,17 @@
 import Site from '../layouts/Site.astro';
 import LandingTemplate from '../components/LandingTemplate.astro';
 import { landingPages } from '../data/landing-pages';
+import { faqSchema, breadcrumbSchema } from '../data/schema';
 
 export function getStaticPaths() {
   return landingPages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
 }
 const { page } = Astro.props;
+const schema = [
+  breadcrumbSchema(Astro.site, page.headline, `/${page.slug}`),
+  ...(page.faq.length > 0 ? [faqSchema(page.faq)] : []),
+];
 ---
-<Site title={page.title} description={page.description}>
+<Site title={page.title} description={page.description} schema={schema}>
   <LandingTemplate page={page} />
 </Site>

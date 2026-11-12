@@ -49,13 +49,15 @@ mark {
   text-underline-offset: 4px;
 }
 
-/* Landing page template */
-.sub, .fine { color: var(--muted); }
-details { border-top: 1px solid var(--border); padding: 10px 0; }
-summary { cursor: pointer; }
-details p { margin: 6px 0 0; color: var(--muted); }
-
 .foot { padding: 16px; color: var(--muted); font-size: .9rem; }
 .foot nav { max-width: 620px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
 .foot a { color: inherit; text-decoration: none; }
 .foot a:hover { color: var(--text); text-decoration: underline; }
+
+/* Landing page template: answer-first lead, visible FAQ, related links */
+.answer { font-size: 1.1rem; }
+section p { margin: 0 0 12px; }
+.qa { border-top: 1px solid var(--border); padding: 12px 0 2px; }
+.qa h3 { font-size: 1rem; margin: 0 0 4px; }
+.qa p { margin: 0 0 10px; color: var(--muted); }
+.related ul { list-style: none; padding: 0; }

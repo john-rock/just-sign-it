@@ -1,21 +1,42 @@
 ---
-import type { LandingPage } from '../data/landing-pages';
+import { relatedPages, type LandingPage } from '../data/landing-pages';
 interface Props { page: LandingPage }
 const { page } = Astro.props;
+const related = relatedPages(page);
 ---
 <h1>{page.headline}</h1>
-<p class="sub">{page.subhead}</p>
+<p class="answer">{page.answer}</p>
 <p class="cta"><a href="/sign" class="btn primary">Sign a PDF</a></p>
+
+{page.sections?.map(({ heading, paragraphs }) => (
+  <section>
+    <h2>{heading}</h2>
+    {paragraphs.map((text) => <p>{text}</p>)}
+  </section>
+))}
 
 <h2>How it works</h2>
 <ol>
   {page.steps.map((step) => <li>{step}</li>)}
 </ol>
 
-<h2>Questions</h2>
-{page.faq.map(({ q, a }) => (
-  <details>
-    <summary>{q}</summary>
-    <p>{a}</p>
-  </details>
-))}
+{page.faq.length > 0 && (
+  <section class="faq">
+    <h2>Questions</h2>
+    {page.faq.map(({ q, a }) => (
+      <div class="qa">
+        <h3>{q}</h3>
+        <p>{a}</p>
+      </div>
+    ))}
+  </section>
+)}
+
+{related.length > 0 && (
+  <nav class="related" aria-label="Related guides">
+    <h2>Related</h2>
+    <ul>
+      {related.map((p) => <li><a href={`/${p.slug}`}>{p.headline}</a></li>)}
+    </ul>
+  </nav>
+)}
