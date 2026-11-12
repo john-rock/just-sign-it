@@ -1,0 +1,14 @@
+---
+// Generates one static page per entry in data/landing-pages.ts at build time.
+import Site from '../layouts/Site.astro';
+import LandingTemplate from '../components/LandingTemplate.astro';
+import { landingPages } from '../data/landing-pages';
+
+export function getStaticPaths() {
+  return landingPages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+const { page } = Astro.props;
+---
+<Site title={page.title} description={page.description}>
+  <LandingTemplate page={page} />
+</Site>

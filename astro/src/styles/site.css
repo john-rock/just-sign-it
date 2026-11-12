@@ -1,0 +1,56 @@
+/* Styles for the marketing pages (homepage + landing pages).
+   Colors, fonts and buttons mirror the app's theme in public/style.css so the two feel like one product. */
+:root {
+  --bg: #f3f4f6; --panel: #ffffff; --text: #111827; --muted: #6b7280; --border: #e5e7eb;
+  --accent: #2563eb; --accent-text: #ffffff; --accent-soft: rgba(37, 99, 235, .12);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1115; --panel: #181b21; --text: #e5e7eb; --muted: #9ca3af; --border: #2a2f38;
+    --accent: #3b82f6; --accent-soft: rgba(59, 130, 246, .18);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1115; --panel: #181b21; --text: #e5e7eb; --muted: #9ca3af; --border: #2a2f38;
+  --accent: #3b82f6; --accent-soft: rgba(59, 130, 246, .18);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+a { color: var(--accent); }
+
+/* Logo + name at the top of the content column */
+.brand { display: inline-flex; align-items: center; gap: 8px; margin-top: 32px; color: inherit; text-decoration: none; font-weight: 700; font-size: 16px; }
+
+/* Buttons: same as the app's buttons */
+.btn {
+  display: inline-block; text-decoration: none; font-size: 14px; line-height: 1.4; font-weight: 600;
+  border: 1px solid var(--accent); border-radius: 8px; padding: 7px 12px;
+}
+.btn.primary { background: var(--accent); color: var(--accent-text); }
+.btn.primary:hover { filter: brightness(1.08); }
+
+.wrap { max-width: 620px; margin: 0 auto; padding: 0 16px 64px; }
+h1 { font-size: 1.75rem; line-height: 1.25; margin: 48px 0 14px; }
+h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 44px 0 10px; }
+ul, ol { padding-left: 1.2em; margin: 0; }
+li { margin-bottom: 8px; }
+.cta { margin: 24px 0 0; }
+
+/* Privacy emphasis: the app's accent, not a new color */
+mark {
+  color: inherit; background: none;
+  text-decoration: underline 2px var(--accent);
+  text-underline-offset: 4px;
+}
+
+/* Landing page template */
+.sub, .fine { color: var(--muted); }
+details { border-top: 1px solid var(--border); padding: 10px 0; }
+summary { cursor: pointer; }
+details p { margin: 6px 0 0; color: var(--muted); }
+
+.foot { border-top: 1px solid var(--border); padding: 20px 16px 40px; color: var(--muted); font-size: .9rem; }
+.foot nav { max-width: 620px; margin: 0 auto; display: flex; flex-direction: column; gap: 4px; }

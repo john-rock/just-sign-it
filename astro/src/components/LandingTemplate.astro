@@ -1,0 +1,21 @@
+---
+import type { LandingPage } from '../data/landing-pages';
+interface Props { page: LandingPage }
+const { page } = Astro.props;
+---
+<h1>{page.headline}</h1>
+<p class="sub">{page.subhead}</p>
+<p class="cta"><a href="/sign" class="btn primary">Sign a PDF</a></p>
+
+<h2>How it works</h2>
+<ol>
+  {page.steps.map((step) => <li>{step}</li>)}
+</ol>
+
+<h2>Questions</h2>
+{page.faq.map(({ q, a }) => (
+  <details>
+    <summary>{q}</summary>
+    <p>{a}</p>
+  </details>
+))}

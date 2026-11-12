@@ -1,0 +1,97 @@
+---
+// The signer app itself — same markup and scripts as the original index.html.
+// Scripts are plain files in /public (is:inline = Astro leaves them alone).
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Sign a PDF — Just Sign It"
+  description="Sign PDFs in your browser. Drag in a PDF, add one or more signatures, place them exactly where you need them, and download. Your file never leaves your device."
+>
+<link slot="head" rel="stylesheet" href="/style.css">
+<header>
+  <h1><a href="/" class="home-link"><img src="/favicon.svg" alt="" class="logo" width="24" height="24">Just Sign It</a></h1>
+  <span id="fileName"></span>
+  <div class="spacer"></div>
+  <div class="zoom">
+    <button id="zoomOut" title="Zoom out" disabled>−</button>
+    <span id="zoomLabel">100%</span>
+    <button id="zoomIn" title="Zoom in" disabled>+</button>
+  </div>
+  <button id="openBtn">Open PDF</button>
+  <button id="downloadBtn" class="primary" disabled>Download signed PDF</button>
+</header>
+
+<main>
+  <aside>
+    <h2>Signatures</h2>
+    <button id="newSigBtn" class="primary">+ New signature</button>
+    <div id="sigList"></div>
+    <p class="hint" id="sigHint">Click a signature to drop it on the page you're viewing, or drag it onto any page. Then drag to move, use the corner dot to resize, and arrow keys to nudge (Shift = bigger steps).</p>
+    <label class="check remember"><input type="checkbox" id="rememberSigs"> Remember my signatures on this device</label>
+    <p class="hint small">Leave this off on shared or public computers.</p>
+    <div class="spacer"></div>
+    <p class="hint small disclaimer">Your PDF never leaves your device — everything happens in your browser. This tool places an image of your signature on the document; it is not a certified or verifiable digital signature.</p>
+  </aside>
+
+  <section id="viewer">
+    <div id="empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 18v-6M9 15l3-3 3 3"/></svg>
+      <div class="big">Drop a PDF here</div>
+      <div class="hint">Your file stays on your computer — nothing is uploaded.</div>
+      <button id="chooseBtn" class="primary">Choose PDF</button>
+    </div>
+    <div id="pages"></div>
+  </section>
+</main>
+
+<input type="file" id="fileInput" accept="application/pdf,.pdf" hidden>
+<input type="file" id="imgInput" accept="image/*" hidden>
+<div id="dropOverlay">Drop PDF to open</div>
+<div id="toast"></div>
+
+<div class="modal-bg" id="modal">
+  <div class="modal" role="dialog" aria-labelledby="modalTitle">
+    <h3 id="modalTitle">New signature</h3>
+    <div class="tabs">
+      <button data-tab="draw" class="active">Draw</button>
+      <button data-tab="type">Type</button>
+      <button data-tab="upload">Upload</button>
+    </div>
+
+    <div class="tab active" id="tab-draw">
+      <canvas id="drawPad"></canvas>
+      <div class="row">
+        <span class="hint">Ink:</span>
+        <button class="swatch active" data-color="#111111" title="Black"></button>
+        <button class="swatch" data-color="#1d3fbb" title="Blue"></button>
+        <div class="spacer"></div>
+        <button id="clearPad">Clear</button>
+      </div>
+    </div>
+
+    <div class="tab" id="tab-type">
+      <input type="text" id="typeInput" placeholder="Type your name" autocomplete="off">
+      <div class="font-opts" id="fontOpts"></div>
+      <div class="row">
+        <span class="hint">Ink:</span>
+        <button class="swatch active" data-color="#111111" title="Black"></button>
+        <button class="swatch" data-color="#1d3fbb" title="Blue"></button>
+      </div>
+    </div>
+
+    <div class="tab" id="tab-upload">
+      <div id="uploadZone">Click or drop an image of your signature</div>
+      <label class="check"><input type="checkbox" id="removeBg" checked> Remove white background</label>
+    </div>
+
+    <div class="modal-actions">
+      <button id="cancelSig">Cancel</button>
+      <button id="saveSig" class="primary">Save signature</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline src="/vendor/pdf.min.js"></script>
+<script is:inline src="/vendor/pdf-lib.min.js"></script>
+<script is:inline src="/app.js"></script>
+</Base>
