@@ -8,7 +8,12 @@ const { title, description } = Astro.props;
 ---
 <Base title={title} description={description}>
   <main class="wrap">
-    <a href="/" class="brand"><img src="/favicon.svg" alt="" width="24" height="24">Just Sign It</a>
+    <header class="top">
+      <a href="/" class="brand"><img src="/favicon.svg" alt="" width="24" height="24">Just Sign It</a>
+      <nav class="top-nav">
+        <a href="/why" aria-current={Astro.url.pathname.replace(/\/$/, '') === '/why' ? 'page' : undefined}>Why I built this</a>
+      </nav>
+    </header>
     <slot />
   </main>
   {landingPages.length > 0 && (
