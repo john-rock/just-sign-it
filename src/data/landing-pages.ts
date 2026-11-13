@@ -31,7 +31,7 @@ export interface LandingPage {
 }
 
 // Steps shared by the "how to sign" pages.
-const signSteps = [
+export const signSteps = [
   'Drop your PDF onto the page, or click “Choose PDF”.',
   'Click “New signature”. Draw it, type your name in a handwriting font, or upload a photo of it.',
   'Click your signature to place it. Drag it where it goes and use the corner dot to resize it.',

@@ -2,10 +2,12 @@
 // The signer app itself — same markup and scripts as the original index.html.
 // Scripts are plain files in /public (is:inline = Astro leaves them alone).
 import Base from '../layouts/Base.astro';
+import { appSchema, breadcrumbSchema } from '../data/schema';
 ---
 <Base
   title="Sign a PDF — Just Sign It"
   description="Sign PDFs in your browser. Drag in a PDF, add one or more signatures, place them exactly where you need them, and download. Your file never leaves your device."
+  schema={[appSchema(Astro.site), breadcrumbSchema(Astro.site, [['Sign a PDF', '/sign']])]}
 >
 <link slot="head" rel="stylesheet" href="/style.css">
 <header>

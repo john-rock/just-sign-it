@@ -1,6 +1,7 @@
 ---
 // Shared <head> for every page. Each page passes its own title/description for SEO,
 // and optionally `schema`: JSON-LD structured data (one object or a list) for search and answer engines.
+import { markdownPath } from '../data/markdown';
 interface Props {
   title: string;
   description: string;
@@ -9,6 +10,8 @@ interface Props {
 const { title, description, schema } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/og.png', Astro.site);
+// Every page has a markdown copy for AI agents (see data/markdown.ts and /middleware.ts).
+const markdownHref = markdownPath(Astro.url.pathname);
 // Escape "<" so text inside the JSON can never close the <script> tag early.
 const jsonLd = schema && JSON.stringify(schema).replace(/</g, '\\u003c');
 ---
@@ -33,6 +36,7 @@ const jsonLd = schema && JSON.stringify(schema).replace(/</g, '\\u003c');
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="sitemap" href="/sitemap-index.xml">
+<link rel="alternate" type="text/markdown" href={markdownHref}>
 <link rel="stylesheet" href="/fonts/fonts.css">
 {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
 <!-- Privacy-friendly analytics by Plausible -->
