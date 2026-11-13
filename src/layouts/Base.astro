@@ -35,6 +35,9 @@ const jsonLd = schema && JSON.stringify(schema).replace(/</g, '\\u003c');
 <link rel="sitemap" href="/sitemap-index.xml">
 <link rel="stylesheet" href="/fonts/fonts.css">
 {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
+<!-- Privacy-friendly analytics by Plausible -->
+<script is:inline async src="https://plausible.io/js/pa-Mpeoaj_RmqkPmkYpG_UIr.js"></script>
+<script is:inline src="/plausible-init.js"></script>
 <slot name="head" />
 </head>
 <body>
