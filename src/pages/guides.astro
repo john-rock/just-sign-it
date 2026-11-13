@@ -12,6 +12,7 @@ const schema = [
     '@type': 'CollectionPage',
     name: 'Guides to signing PDFs',
     url: new URL('/guides', Astro.site).href,
+    isPartOf: { '@id': new URL('/#website', Astro.site).href },
     hasPart: groups.flatMap((g) => g.pages).map((p) => ({
       '@type': 'WebPage',
       name: p.headline,

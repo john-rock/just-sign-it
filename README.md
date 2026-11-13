@@ -33,7 +33,11 @@ src/
   pages/index.astro      Homepage (/)
   pages/sign.astro       The signer (/sign)
   pages/[slug].astro     Landing pages, generated from the data file below
+  pages/*.md.ts          Markdown copy of each page (/why.md, /index.md, ...)
+  pages/llms.txt.ts      /llms.txt and /llms-full.txt for AI agents
   data/landing-pages.ts  Landing page content
+  data/markdown.ts       Markdown versions of the pages
+  data/schema.ts         JSON-LD structured data
   components/LandingTemplate.astro
   layouts/Base.astro     Shared <head> for every page
   layouts/Site.astro     Shared layout for the homepage and landing pages
@@ -54,6 +58,12 @@ npm run preview  # serves the build
 ## Adding a landing page
 
 Add an entry to `src/data/landing-pages.ts`. Each entry becomes a page at `/<slug>` using `src/components/LandingTemplate.astro`, and gets linked in the footer. There's a commented-out example in the file.
+
+## Markdown for AI agents
+
+Every page has a markdown copy at the same URL plus `.md` (the homepage is `/index.md`). `middleware.ts` is Vercel Routing Middleware: a page request that sends `Accept: text/markdown` gets the markdown copy at the normal URL. `/llms.txt` lists every page, and `/llms-full.txt` has all of them in one file.
+
+Guide pages turn into markdown from `src/data/landing-pages.ts` automatically. The homepage, `/why` and `/sign` are written out by hand in `src/data/markdown.ts`, so update them there when you edit those pages.
 
 ## Deploying
 

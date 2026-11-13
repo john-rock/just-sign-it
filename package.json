@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.4",
+    "@vercel/functions": "3.11.2",
     "astro": "7.4.11"
   }
 }

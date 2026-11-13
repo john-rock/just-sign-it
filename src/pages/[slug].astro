@@ -3,7 +3,7 @@
 import Site from '../layouts/Site.astro';
 import LandingTemplate from '../components/LandingTemplate.astro';
 import { landingPages } from '../data/landing-pages';
-import { faqSchema, breadcrumbSchema } from '../data/schema';
+import { articleSchema, breadcrumbSchema, faqSchema, howToSchema } from '../data/schema';
 
 export function getStaticPaths() {
   return landingPages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
@@ -11,6 +11,9 @@ export function getStaticPaths() {
 const { page } = Astro.props;
 const schema = [
   breadcrumbSchema(Astro.site, [['Guides', '/guides'], [page.headline, `/${page.slug}`]]),
+  articleSchema(Astro.site, page),
+  // The "Sign a PDF" guides are step-by-step how-tos; the "Questions" guides are explainers.
+  ...(page.group === 'sign' ? [howToSchema(Astro.site, page)] : []),
   ...(page.faq.length > 0 ? [faqSchema(page.faq)] : []),
 ];
 ---
