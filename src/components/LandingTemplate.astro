@@ -4,6 +4,7 @@ interface Props { page: LandingPage }
 const { page } = Astro.props;
 const related = relatedPages(page);
 ---
+<p class="crumb"><a href="/guides">Guides</a></p>
 <h1>{page.headline}</h1>
 <p class="answer">{page.answer}</p>
 <p class="cta"><a href="/sign" class="btn primary">Sign a PDF</a></p>

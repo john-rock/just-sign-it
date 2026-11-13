@@ -1,0 +1,46 @@
+---
+// Hub page listing every landing page, grouped. New entries in data/landing-pages.ts show up here automatically.
+import Site from '../layouts/Site.astro';
+import { pagesByGroup } from '../data/landing-pages';
+import { breadcrumbSchema } from '../data/schema';
+
+const groups = pagesByGroup();
+const schema = [
+  breadcrumbSchema(Astro.site, [['Guides', '/guides']]),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Guides to signing PDFs',
+    url: new URL('/guides', Astro.site).href,
+    hasPart: groups.flatMap((g) => g.pages).map((p) => ({
+      '@type': 'WebPage',
+      name: p.headline,
+      url: new URL(`/${p.slug}`, Astro.site).href,
+    })),
+  },
+];
+---
+<Site
+  title="Guides to signing PDFs | Just Sign It"
+  description="How to sign a PDF without an account, uploads or printing, plus plain answers about whether electronic signatures are legally binding."
+  schema={schema}
+>
+  <h1>Guides</h1>
+  <p class="answer">How to sign a PDF without jumping through a thousand hoops, plus straight answers to the questions that come up when you do.</p>
+
+  {groups.map((group) => (
+    <section class="guide-group">
+      <h2>{group.label}</h2>
+      <ul class="guide-list">
+        {group.pages.map((p) => (
+          <li>
+            <a href={`/${p.slug}`}>{p.headline}</a>
+            <p>{p.description}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+
+  <p class="cta"><a href="/sign" class="btn primary">Sign a PDF</a></p>
+</Site>

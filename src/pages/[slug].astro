@@ -10,7 +10,7 @@ export function getStaticPaths() {
 }
 const { page } = Astro.props;
 const schema = [
-  breadcrumbSchema(Astro.site, page.headline, `/${page.slug}`),
+  breadcrumbSchema(Astro.site, [['Guides', '/guides'], [page.headline, `/${page.slug}`]]),
   ...(page.faq.length > 0 ? [faqSchema(page.faq)] : []),
 ];
 ---

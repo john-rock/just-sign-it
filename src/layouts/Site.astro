@@ -2,24 +2,42 @@
 // Layout for marketing pages: shared header + footer around the page content.
 import Base from './Base.astro';
 import '../styles/site.css';
-import { landingPages } from '../data/landing-pages';
+import { landingPages, pagesByGroup } from '../data/landing-pages';
 interface Props { title: string; description: string; schema?: object | object[] }
 const { title, description, schema } = Astro.props;
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const groups = pagesByGroup();
+// "Guides" stays highlighted on the hub and on every guide page.
+const inGuides = path === '/guides' || landingPages.some((p) => `/${p.slug}` === path);
+const navLinks = [
+  { href: '/guides', label: 'Guides', current: inGuides, exact: path === '/guides' },
+  { href: '/why', label: 'Why I built this', current: path === '/why', exact: path === '/why' },
+];
 ---
 <Base title={title} description={description} schema={schema}>
   <main class="wrap">
     <header class="top">
       <a href="/" class="brand"><img src="/favicon.svg" alt="" width="24" height="24">Just Sign It</a>
-      <nav class="top-nav">
-        <a href="/why" aria-current={Astro.url.pathname.replace(/\/$/, '') === '/why' ? 'page' : undefined}>Why I built this</a>
+      <nav class="top-nav" aria-label="Main">
+        {navLinks.map((l) => (
+          <a href={l.href} class:list={{ current: l.current }} aria-current={l.exact ? 'page' : undefined}>{l.label}</a>
+        ))}
       </nav>
     </header>
     <slot />
   </main>
-  {landingPages.length > 0 && (
+  {groups.length > 0 && (
     <footer class="foot">
-      <nav>
-        {landingPages.map((p) => <a href={`/${p.slug}`}>{p.headline}</a>)}
+      <nav aria-label="Guides">
+        {groups.map((group) => (
+          <div>
+            <h2>{group.label}</h2>
+            <ul>
+              {group.pages.map((p) => <li><a href={`/${p.slug}`}>{p.headline}</a></li>)}
+            </ul>
+          </div>
+        ))}
       </nav>
     </footer>
   )}

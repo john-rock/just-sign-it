@@ -186,6 +186,7 @@
   .hint.small { font-size: 11px; }
   label.remember { color: var(--text); margin-top: 4px; }
   .disclaimer { border-top: 1px solid var(--border); padding-top: 10px; }
+  .disclaimer a { color: inherit; }
   aside .spacer { flex: 1; }
   .page canvas { background: #fff; }
 

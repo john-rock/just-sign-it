@@ -24,8 +24,9 @@ a { color: var(--accent); }
 /* Logo + name at the top of the content column */
 .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 32px; }
 .brand { display: inline-flex; align-items: center; gap: 8px; color: inherit; text-decoration: none; font-weight: 700; font-size: 16px; }
+.top-nav { display: flex; gap: 20px; }
 .top-nav a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; }
-.top-nav a:hover, .top-nav a[aria-current="page"] { color: var(--text); }
+.top-nav a:hover, .top-nav a.current { color: var(--text); }
 
 /* Buttons: same as the app's buttons */
 .btn {
@@ -49,8 +50,10 @@ mark {
   text-underline-offset: 4px;
 }
 
-.foot { padding: 16px; color: var(--muted); font-size: .9rem; }
-.foot nav { max-width: 620px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
+.foot { padding: 16px 16px 48px; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--border); }
+.foot nav { max-width: 620px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+.foot h2 { margin: 16px 0 10px; }
+.foot ul { list-style: none; padding: 0; }
 .foot a { color: inherit; text-decoration: none; }
 .foot a:hover { color: var(--text); text-decoration: underline; }
 
@@ -61,3 +64,15 @@ section p { margin: 0 0 12px; }
 .qa h3 { font-size: 1rem; margin: 0 0 4px; }
 .qa p { margin: 0 0 10px; color: var(--muted); }
 .related ul { list-style: none; padding: 0; }
+
+/* Small "Guides" link above a guide's headline */
+.crumb { margin: 40px 0 0; font-size: 14px; }
+.crumb a { color: var(--muted); text-decoration: none; }
+.crumb a:hover { color: var(--text); }
+.crumb + h1 { margin-top: 6px; }
+
+/* /guides hub */
+.guide-list { list-style: none; padding: 0; }
+.guide-list li { margin-bottom: 18px; }
+.guide-list a { font-weight: 600; }
+.guide-list p { margin: 2px 0 0; color: var(--muted); }

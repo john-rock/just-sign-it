@@ -37,13 +37,17 @@ export function faqSchema(faq: LandingPage['faq']) {
   };
 }
 
-export function breadcrumbSchema(site: URL | undefined, name: string, path: string) {
+/** Breadcrumb trail below the homepage, e.g. [['Guides', '/guides'], ['Some guide', '/some-guide']]. */
+export function breadcrumbSchema(site: URL | undefined, trail: [name: string, path: string][]) {
+  const crumbs: [string, string][] = [['Just Sign It', '/'], ...trail];
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Just Sign It', item: new URL('/', site).href },
-      { '@type': 'ListItem', position: 2, name, item: new URL(path, site).href },
-    ],
+    itemListElement: crumbs.map(([name, path], i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name,
+      item: new URL(path, site).href,
+    })),
   };
 }
