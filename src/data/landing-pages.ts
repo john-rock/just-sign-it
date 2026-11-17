@@ -13,6 +13,7 @@
 
 export const guideGroups = [
   { id: 'sign', label: 'Sign a PDF' },
+  { id: 'devices', label: 'Sign on your device' },
   { id: 'questions', label: 'Questions' },
 ] as const;
 export type GuideGroup = (typeof guideGroups)[number];
@@ -205,6 +206,182 @@ export const landingPages: LandingPage[] = [
       { q: 'Can I remove a signature I put in the wrong place?', a: 'Yes. Select it and click the ×.' },
     ],
     related: ['sign-pdf-without-printing', 'free-pdf-signer-no-watermark', 'sign-pdf-without-account'],
+  },
+
+  // ---- On your device ----
+  {
+    slug: 'sign-pdf-on-iphone',
+    group: 'devices',
+    title: 'How to sign a PDF on iPhone, free | Just Sign It',
+    description: 'Sign a PDF on your iPhone in the browser. Draw your signature with your finger, place it on the page and save the signed copy. No app, no account.',
+    headline: 'How to sign a PDF on an iPhone',
+    answer: 'Open Just Sign It in your iPhone’s browser, choose your PDF, draw your signature with your finger and tap it to place it. Then download the signed copy. There’s no app to install and no account to make.',
+    sections: [
+      {
+        heading: 'Why use the browser instead of an app',
+        paragraphs: [
+          'You don’t need to download anything. Just Sign It is a web page, so it works from whatever browser you already have on your phone, and your PDF stays on your phone while you sign it.',
+          'Your finger is the best pen for this. A signature drawn on a touchscreen usually looks more like your real one than one drawn with a mouse.',
+        ],
+      },
+      {
+        heading: 'Getting the PDF in and out',
+        paragraphs: [
+          'Tap “Choose PDF” and pick the file from your iPhone’s file picker. That’s where PDFs you saved from Mail, Messages or the Files app show up.',
+          'When you tap “Download signed PDF”, your browser saves the new copy to your phone. Check your browser’s downloads list or the Files app to find it, then share it from there.',
+        ],
+      },
+    ],
+    steps: [
+      'Open Just Sign It in your iPhone’s browser and tap “Choose PDF”.',
+      'Pick your PDF from your files.',
+      'Tap “New signature” and draw your signature with your finger. You can also type it or upload a photo of it.',
+      'Tap your signature to place it, then drag it onto the signature line. Use the corner dot to resize it.',
+      'Tap “Download signed PDF”, then share or attach the saved file.',
+    ],
+    faq: [
+      { q: 'Do I need to install an app?', a: 'No. It runs in your phone’s browser.' },
+      { q: 'Is my PDF uploaded?', a: 'No. Your PDF is opened and signed on your phone and never sent to a server.' },
+      { q: 'Where does the signed PDF go?', a: 'Your browser saves it to your phone, the same as any other download. Look in your browser’s downloads or the Files app.' },
+      { q: 'Will it remember my signature?', a: 'Only if you check “Remember my signatures”. Then it’s saved in your browser on that phone. Leave it off if the phone is shared.' },
+    ],
+    related: ['sign-pdf-on-android', 'sign-pdf-without-uploading', 'sign-pdf-without-printing'],
+  },
+  {
+    slug: 'sign-pdf-on-android',
+    group: 'devices',
+    title: 'How to sign a PDF on Android, free | Just Sign It',
+    description: 'Sign a PDF on your Android phone or tablet in the browser. Draw your signature with your finger and download the signed copy. No app, no account.',
+    headline: 'How to sign a PDF on an Android phone or tablet',
+    answer: 'Open Just Sign It in your Android browser, choose your PDF, draw your signature with your finger and tap it to place it. Then download the signed copy. No app and no account.',
+    sections: [
+      {
+        heading: 'Works in the browser you already have',
+        paragraphs: [
+          'Just Sign It is a web page, so there’s nothing to install from the Play Store. Open it in your browser, pick a PDF and sign.',
+          'Your PDF is opened and signed on your device. It isn’t uploaded anywhere.',
+        ],
+      },
+      {
+        heading: 'Phone or tablet',
+        paragraphs: [
+          'On a phone, tap a signature to place it on the page you’re viewing, then drag it into position. On a tablet, you can also use a stylus to draw your signature, which usually looks the most natural.',
+          'The signed copy is saved like any other download. Look in your browser’s downloads or your Files app to find and share it.',
+        ],
+      },
+    ],
+    steps: [
+      'Open Just Sign It in your Android browser and tap “Choose PDF”.',
+      'Pick your PDF from your files.',
+      'Tap “New signature” and draw it with your finger or a stylus. You can also type it or upload a photo of it.',
+      'Tap your signature to place it, then drag it onto the signature line and resize it with the corner dot.',
+      'Tap “Download signed PDF”, then share or attach the saved file.',
+    ],
+    faq: [
+      { q: 'Do I need to install an app?', a: 'No. It runs in your browser.' },
+      { q: 'Does it work on a tablet?', a: 'Yes. The page works on phones, tablets and computers.' },
+      { q: 'Is it free?', a: 'Yes. There’s no account, no trial and no watermark on your PDF.' },
+    ],
+    related: ['sign-pdf-on-iphone', 'free-pdf-signer-no-watermark', 'sign-pdf-without-account'],
+  },
+  {
+    slug: 'sign-pdf-on-mac',
+    group: 'devices',
+    title: 'How to sign a PDF on a Mac, free | Just Sign It',
+    description: 'Sign a PDF on your Mac in the browser, with a trackpad, a typed name or a photo of your signature. No app, no account, nothing uploaded.',
+    headline: 'How to sign a PDF on a Mac',
+    answer: 'Open Just Sign It in Safari, Chrome or another browser on your Mac, choose your PDF, make a signature and drop it on the page. Then download the signed copy. No account, and nothing is uploaded.',
+    sections: [
+      {
+        heading: 'You may not need this on a Mac',
+        paragraphs: [
+          'macOS has a built-in way to sign a PDF in Preview. If that works for you, use it. It’s a good tool.',
+          'Just Sign It is handy when you’re on a Mac that isn’t yours, when you want to place the same signature and your initials on many pages, or when you’d rather not hunt for the right menu in Preview.',
+        ],
+      },
+      {
+        heading: 'Three ways to make your signature',
+        paragraphs: [
+          'Draw it with your trackpad, which usually looks better than drawing with a mouse. Type your name and pick a handwriting font. Or sign a piece of white paper, take a photo and upload it. Just Sign It can remove the white background.',
+          'You can save your full signature and your initials. Use the arrow keys to nudge a placed signature a little at a time.',
+        ],
+      },
+    ],
+    steps: signSteps,
+    faq: [
+      { q: 'Is this the same as signing in Preview?', a: 'It does a similar job, but it runs in your browser instead of an app. That means you can use it on any computer without setting anything up.' },
+      { q: 'Does it work in Safari?', a: 'It’s a regular web page, so it should work in current versions of Safari, Chrome, Firefox and Edge on a Mac.' },
+      { q: 'Is my PDF uploaded?', a: 'No. Everything happens in your browser, so your file never leaves your Mac.' },
+    ],
+    related: ['sign-pdf-on-windows', 'add-signature-and-initials-to-pdf', 'sign-pdf-without-uploading'],
+  },
+  {
+    slug: 'sign-pdf-on-windows',
+    group: 'devices',
+    title: 'How to sign a PDF on Windows, free | Just Sign It',
+    description: 'Sign a PDF on Windows 10 or 11 in your browser. Draw, type or upload your signature and download the signed copy. No app, no account.',
+    headline: 'How to sign a PDF on Windows',
+    answer: 'Open Just Sign It in Edge, Chrome or Firefox on your Windows PC, choose your PDF, make a signature and drop it on the page. Then download the signed copy. No software to install and no account.',
+    sections: [
+      {
+        heading: 'No extra software',
+        paragraphs: [
+          'Windows doesn’t have a simple built-in way to put a signature on a PDF, and a lot of the free tools out there want you to install a program or make an account first.',
+          'Just Sign It runs in your browser instead. There’s nothing to install, and your PDF stays on your computer.',
+        ],
+      },
+      {
+        heading: 'Making a signature that looks right',
+        paragraphs: [
+          'Drawing with a mouse can look shaky. If you have a touchscreen, a pen or a laptop trackpad, use that. Otherwise, type your name in a handwriting font, or sign white paper, snap a photo with your phone and upload it. Just Sign It can remove the white background.',
+          'Once it’s placed, drag it into position, use the corner dot to resize it and use the arrow keys to nudge it.',
+        ],
+      },
+    ],
+    steps: signSteps,
+    faq: [
+      { q: 'Do I need Adobe Acrobat?', a: 'No. Just Sign It does the signing in your browser, so you don’t need Acrobat or any other PDF program.' },
+      { q: 'Which browsers work?', a: 'It’s a regular web page, so it should work in current versions of Edge, Chrome and Firefox.' },
+      { q: 'Is my PDF uploaded?', a: 'No. Everything happens in your browser, so your file never leaves your computer.' },
+    ],
+    related: ['sign-pdf-on-mac', 'sign-pdf-without-account', 'free-pdf-signer-no-watermark'],
+  },
+  {
+    slug: 'sign-pdf-on-chromebook',
+    group: 'devices',
+    title: 'How to sign a PDF on a Chromebook | Just Sign It',
+    description: 'Sign a PDF on a Chromebook right in Chrome. Draw, type or upload your signature and download the signed copy. No app, no account.',
+    headline: 'How to sign a PDF on a Chromebook',
+    answer: 'Open Just Sign It in Chrome on your Chromebook, choose your PDF, make a signature and drop it on the page. Then download the signed copy. No app to install and no account.',
+    sections: [
+      {
+        heading: 'Built for a browser-only computer',
+        paragraphs: [
+          'A Chromebook mostly runs web pages, which is exactly what Just Sign It is. There’s nothing to install and no extension to add.',
+          'Your PDF is opened and signed in the browser. It isn’t uploaded to a server.',
+        ],
+      },
+      {
+        heading: 'Touchscreen, trackpad or paper',
+        paragraphs: [
+          'If your Chromebook has a touchscreen, draw your signature with your finger or a stylus. If not, a trackpad works, or you can type your name in a handwriting font.',
+          'You can also sign a piece of white paper, take a photo and upload it. Just Sign It can remove the white background.',
+        ],
+      },
+      {
+        heading: 'Finding the signed PDF',
+        paragraphs: [
+          'The signed copy is saved like any other download, usually to your Downloads folder in the Files app. From there you can attach it to an email or upload it where it needs to go.',
+        ],
+      },
+    ],
+    steps: signSteps,
+    faq: [
+      { q: 'Do I need an extension or app?', a: 'No. It works as a regular web page in Chrome.' },
+      { q: 'Is it free?', a: 'Yes. There’s no account, no trial and no watermark on your PDF.' },
+      { q: 'Is my PDF uploaded?', a: 'No. Everything happens in your browser, so your file never leaves your Chromebook.' },
+    ],
+    related: ['sign-pdf-on-windows', 'sign-pdf-without-uploading', 'sign-pdf-without-account'],
   },
 
   // ---- Questions people ask (answer engines) ----
