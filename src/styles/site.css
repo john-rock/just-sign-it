@@ -76,3 +76,25 @@ section p { margin: 0 0 12px; }
 .guide-list li { margin-bottom: 18px; }
 .guide-list a { font-weight: 600; }
 .guide-list p { margin: 2px 0 0; color: var(--muted); }
+
+/* Drop zone (homepage hero + guide pages). The file input sits inside the label, so the whole box is clickable and keyboard-focusable. */
+.dropzone { margin: 24px 0 0; }
+.dz-box {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; cursor: pointer;
+  padding: 36px 20px; border: 2px dashed var(--border); border-radius: 14px; background: var(--panel);
+  transition: border-color .15s, background .15s;
+}
+.dz-box:hover, .dropzone.over .dz-box, .dz-box:focus-within { border-color: var(--accent); background: var(--accent-soft); }
+.dz-box:focus-within { box-shadow: 0 0 0 3px var(--accent-soft); }
+.dz-input { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+.dz-box svg { width: 44px; height: 44px; color: var(--accent); }
+.dz-title { font-size: 1.15rem; font-weight: 700; }
+.dz-sub { color: var(--muted); font-size: .95rem; }
+.dz-link { color: var(--accent); text-decoration: underline; }
+.dz-status { margin: 8px 0 0; min-height: 1.2em; font-size: .9rem; color: var(--muted); text-align: center; }
+.dz-note { margin: 4px 0 0; color: var(--muted); font-size: .9rem; text-align: center; }
+.dropzone.compact .dz-box { flex-direction: row; justify-content: center; gap: 12px; padding: 14px 16px; flex-wrap: wrap; }
+.dropzone.compact svg { width: 28px; height: 28px; }
+.dropzone.compact .dz-title { font-size: 1rem; }
+.dropzone.compact .dz-status { min-height: 0; }

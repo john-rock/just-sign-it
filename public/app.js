@@ -627,4 +627,29 @@
   }
   loadSigs();
   renderSigList();
+
+  // A PDF dropped on the homepage or a guide page waits in IndexedDB (see handoff.js). Open it once and delete it.
+  function takeHandoff() {
+    return new Promise((resolve) => {
+      try {
+        const req = indexedDB.open('justsignit-handoff', 1);
+        req.onupgradeneeded = () => req.result.createObjectStore('files');
+        req.onerror = () => resolve(null);
+        req.onsuccess = () => {
+          const db = req.result;
+          const tx = db.transaction('files', 'readwrite');
+          const store = tx.objectStore('files');
+          const get = store.get('pending');
+          store.delete('pending');
+          tx.oncomplete = () => {
+            db.close();
+            const rec = get.result;
+            resolve(rec && rec.file && Date.now() - rec.at < 5 * 60 * 1000 ? rec.file : null);
+          };
+          tx.onerror = tx.onabort = () => resolve(null);
+        };
+      } catch (e) { resolve(null); }
+    });
+  }
+  takeHandoff().then((f) => { if (f && !state.pdf) openPdf(f); });
 })();

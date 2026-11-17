@@ -1,5 +1,6 @@
 ---
 import Site from '../layouts/Site.astro';
+import DropZone from '../components/DropZone.astro';
 import { appSchema, organizationSchema, websiteSchema } from '../data/schema';
 ---
 <Site
@@ -9,8 +10,8 @@ import { appSchema, organizationSchema, websiteSchema } from '../data/schema';
 >
   <h1>Sign PDFs <mark>right in your browser.</mark></h1>
   <p>Open a PDF, add your signature, and download the signed copy. Nothing gets uploaded, so your file <mark>never leaves your computer.</mark></p>
-  <p>It’s free and you don’t need an account.</p>
-  <p class="cta"><a href="/sign" class="btn primary">Sign a PDF</a></p>
+  <DropZone />
+  <p class="dz-note">It’s free and you don’t need an account. <a href="/sign">Open the tool</a> without a file.</p>
 
   <h2>What it does</h2>
   <ul>
