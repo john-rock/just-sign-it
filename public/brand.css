@@ -1,0 +1,107 @@
+/* ==========================================================================
+   JUST SIGN IT: "Ink & Stamp" design system
+   One file for the brand: tokens, type, buttons, stamps, wordmark.
+   Loaded by src/layouts/Base.astro on every page (marketing pages and the /sign app),
+   so public/style.css and src/styles/site.css only hold layout.
+
+   Idea: a signature is the last thing you do on a document, so the whole brand
+   feels like a desk: warm paper, black wet ink, a vermilion rubber stamp and a
+   yellow highlighter. Hard offset shadows, thick ink outlines, no blur.
+
+   Palette
+     paper     #FFF4DF   page background
+     card      #FFFBF2   panels, inputs
+     ink       #14110F   text, outlines, shadows
+     stamp     #FF4B1F   primary action (vermilion). Always paired with ink text.
+     highlight #FFD84D   emphasis, "the important bit"
+     cobalt    #1D3FBB   links, and the "blue pen" signature ink
+
+   Type
+     display   heavy serif (Iowan / Palatino / Georgia), tight and loud
+     body      system sans
+     hand      Caveat (self-hosted): margin notes, annotations, signatures only
+   ========================================================================== */
+:root {
+  --paper: #fff4df;
+  --card: #fffbf2;
+  --ink: #14110f;
+  --stamp: #ff4b1f;
+  --highlight: #ffd84d;
+  --cobalt: #1d3fbb;
+
+  /* Semantic tokens. Everything else in the app reads these. */
+  --bg: var(--paper);
+  --panel: var(--card);
+  --text: var(--ink);
+  --muted: #5a5046;
+  --border: var(--ink);
+  --line-soft: #e6d9bf;
+  --accent: var(--stamp);
+  --accent-text: var(--ink);
+  --accent-soft: rgba(255, 75, 31, .16);
+  --stamp-ink: #c42d06; /* stamp red tuned for text on paper */
+  --link: var(--cobalt);
+  --danger: #b91c1c;
+  --canvas-bg: #ffffff;
+
+  --radius: 12px;
+  --radius-lg: 18px;
+  --bw: 2px;
+  --shadow-sm: 2px 2px 0 var(--ink);
+  --shadow: 4px 4px 0 var(--ink);
+  --shadow-lg: 7px 7px 0 var(--ink);
+
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-hand: "Caveat", "Dancing Script", cursive;
+}
+
+/* Dark mode = the desk at night: ink-black paper, cream text, a hotter stamp. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14110f; --panel: #201b17; --text: #fff4df; --muted: #bdb09d;
+    --border: #fff4df; --line-soft: #3a322b; --accent: #ff6a3d; --accent-text: #14110f;
+    --accent-soft: rgba(255, 106, 61, .2); --stamp-ink: #ff7a52; --link: #9db4ff; --danger: #ff7a7a;
+    --shadow-sm: 2px 2px 0 #000; --shadow: 4px 4px 0 #000; --shadow-lg: 7px 7px 0 #000;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14110f; --panel: #201b17; --text: #fff4df; --muted: #bdb09d;
+  --border: #fff4df; --line-soft: #3a322b; --accent: #ff6a3d; --accent-text: #14110f;
+  --accent-soft: rgba(255, 106, 61, .2); --stamp-ink: #ff7a52; --link: #9db4ff; --danger: #ff7a7a;
+  --shadow-sm: 2px 2px 0 #000; --shadow: 4px 4px 0 #000; --shadow-lg: 7px 7px 0 #000;
+}
+
+::selection { background: var(--highlight); color: #14110f; }
+:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
+
+/* ---- Wordmark: "Just [Sign] It" with Sign on a highlighter swipe -------- */
+.wm { font-family: var(--font-display); font-weight: 900; letter-spacing: -.02em; white-space: nowrap; }
+.wm i {
+  font-style: normal; color: #14110f; background: var(--highlight);
+  padding: 0 .22em; margin: 0 .04em; border-radius: 3px; transform: rotate(-2deg); display: inline-block;
+}
+
+/* ---- Buttons: pressable. Hard shadow collapses on press. ---------------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font: 800 15px/1.2 var(--font-body); letter-spacing: .01em; text-decoration: none; color: var(--text);
+  background: var(--panel); border: var(--bw) solid var(--border); border-radius: var(--radius);
+  padding: 11px 18px; box-shadow: var(--shadow); cursor: pointer;
+  transition: transform .08s ease, box-shadow .08s ease;
+}
+.btn:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--border); }
+.btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--border); }
+.btn.primary { background: var(--accent); color: var(--accent-text); }
+.btn.big { font-size: 17px; padding: 15px 24px; border-radius: 14px; }
+@media (prefers-reduced-motion: reduce) { .btn, .btn:hover, .btn:active { transition: none; } }
+
+/* ---- Stamp: the rubber-stamp sticker. Use for trust claims. -------------- */
+.stamp {
+  display: inline-block; font: 900 12px/1.1 var(--font-body); letter-spacing: .14em; text-transform: uppercase;
+  color: var(--stamp-ink); border: 3px double var(--stamp-ink); border-radius: 8px; padding: 7px 10px;
+  transform: rotate(-4deg); background: transparent;
+}
+
+/* ---- Hand: margin-note voice -------------------------------------------- */
+.hand { font-family: var(--font-hand); font-weight: 600; letter-spacing: .01em; }

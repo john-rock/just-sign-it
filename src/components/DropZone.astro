@@ -7,8 +7,9 @@ const { compact = false } = Astro.props;
   <label class="dz-box">
     <input type="file" accept="application/pdf,.pdf" class="dz-input">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 18v-6M9 15l3-3 3 3"/></svg>
-    <span class="dz-title">Drop a PDF here to sign it</span>
-    <span class="dz-sub">or <span class="dz-link">choose a file</span>. It stays on your computer.</span>
+    <span class="dz-title"><span class="dz-hover">Drop a PDF here to sign it</span><span class="dz-touch">Pick a PDF to sign it</span></span>
+    <span class="dz-sub"><span class="dz-hover">or choose a file. </span>It stays on your computer.</span>
+    <span class="btn primary big dz-btn">Choose a PDF</span>
   </label>
   <p class="dz-status" data-dropzone-status role="status"></p>
   <noscript><p class="dz-status">JavaScript is needed to sign a PDF.</p></noscript>
