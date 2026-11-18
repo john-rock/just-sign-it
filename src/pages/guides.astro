@@ -35,13 +35,16 @@ const schema = [
       <ul class="guide-list">
         {group.pages.map((p) => (
           <li>
-            <a href={`/${p.slug}`}>{p.headline}</a>
-            <p>{p.description}</p>
+            <a class="card" href={`/${p.slug}`}><strong>{p.headline}</strong><span>{p.description}</span></a>
           </li>
         ))}
       </ul>
     </section>
   ))}
 
-  <p class="cta"><a href="/sign" class="btn primary">Sign a PDF</a></p>
+  <aside class="signoff">
+    <span class="hand">Enough reading.</span>
+    <p>Got a PDF to sign?</p>
+    <a href="/sign" class="btn primary big">Sign a PDF</a>
+  </aside>
 </Site>

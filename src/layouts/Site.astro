@@ -12,17 +12,18 @@ const groups = pagesByGroup();
 const inGuides = path === '/guides' || landingPages.some((p) => `/${p.slug}` === path);
 const navLinks = [
   { href: '/guides', label: 'Guides', current: inGuides, exact: path === '/guides' },
-  { href: '/why', label: 'Why I built this', current: path === '/why', exact: path === '/why' },
+  { href: '/why', label: 'Why I built this', current: path === '/why', exact: path === '/why', hideSm: true },
 ];
 ---
 <Base title={title} description={description} schema={schema}>
   <main class="wrap">
     <header class="top">
-      <a href="/" class="brand"><img src="/favicon.svg" alt="" width="24" height="24">Just Sign It</a>
+      <a href="/" class="brand"><img src="/favicon.svg" alt="" width="34" height="34"><span class="wm">Just <i>Sign</i> It</span></a>
       <nav class="top-nav" aria-label="Main">
         {navLinks.map((l) => (
-          <a href={l.href} class:list={{ current: l.current }} aria-current={l.exact ? 'page' : undefined}>{l.label}</a>
+          <a href={l.href} class:list={{ current: l.current, 'hide-sm': l.hideSm }} aria-current={l.exact ? 'page' : undefined}>{l.label}</a>
         ))}
+        {path !== '/' && <a href="/sign" class="btn primary">Sign a PDF</a>}
       </nav>
     </header>
     <slot />
@@ -39,6 +40,10 @@ const navLinks = [
           </div>
         ))}
       </nav>
+      <p class="fine">
+        <span class="hand">Sign it. Done.</span>
+        <span>Free, no account, nothing uploaded. <a href="https://github.com/john-rock/just-sign-it">Open source</a>.</span>
+      </p>
     </footer>
   )}
 </Base>

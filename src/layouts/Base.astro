@@ -23,7 +23,7 @@ const jsonLd = schema && JSON.stringify(schema).replace(/</g, '\\u003c');
 <title>{title}</title>
 <meta name="description" content={description}>
 <link rel="canonical" href={canonical}>
-<meta name="theme-color" content="#2563eb">
+<meta name="theme-color" content="#ff4b1f">
 <meta property="og:site_name" content="Just Sign It">
 <meta property="og:title" content={title}>
 <meta property="og:description" content={description}>
@@ -38,6 +38,7 @@ const jsonLd = schema && JSON.stringify(schema).replace(/</g, '\\u003c');
 <link rel="sitemap" href="/sitemap-index.xml">
 <link rel="alternate" type="text/markdown" href={markdownHref}>
 <link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/brand.css">
 {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
 <!-- Privacy-friendly analytics by Plausible -->
 <script is:inline async src="https://plausible.io/js/pa-Mpeoaj_RmqkPmkYpG_UIr.js"></script>
